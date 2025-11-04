@@ -42,7 +42,7 @@ public class SecurityConfig {
 
                 .oauth2Login(oauth -> oauth
                         .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
-                        .defaultSuccessUrl("/api/auth/oauth2/success", true)
+                        .defaultSuccessUrl("http://localhost:8080/api/success", true)
                 );
 
         return http.build();
