@@ -12,46 +12,45 @@ export default function LoginForm() {
         email,
         password,
       });
-      alert("Login successful: " + res.data.name);
+      alert("✅ Login successful!");
+      console.log("JWT Token:", res.data);
+      localStorage.setItem("token", res.data);
     } catch (err) {
-      alert("Invalid credentials");
+      console.error(err);
+      alert("❌ Invalid credentials");
     }
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br /><br />
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br /><br />
-        <button type="submit">Login</button>
-      </form>
-      <hr />
-      <button
-        onClick={() =>
-          (window.location.href = "http://localhost:8080/oauth2/authorization/google")
-        }
-      >
-        Login with Google
-      </button>
-      <br /><br />
-      <button
-        onClick={() =>
-          (window.location.href = "http://localhost:8080/oauth2/authorization/github")
-        }
-      >
-        Login with GitHub
-      </button>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Welcome Back</h2>
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
+
+        <div className="oauth-section">
+          <p>or login using</p>
+          <a className="google-btn" href="http://localhost:8080/oauth2/authorization/google">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" />
+            Sign in with Google
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
