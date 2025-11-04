@@ -37,4 +37,9 @@ public class UserController {
             return ResponseEntity.badRequest().body("Invalid credentials");
         }
     }
+     @GetMapping("/success")
+    public String getsuccess()
+    {
+        return "Welcome to Your Dashboard";
+    }
 }
